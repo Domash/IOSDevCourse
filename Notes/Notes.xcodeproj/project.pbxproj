@@ -15,6 +15,9 @@
 		EA6BE55E23DB48B600066F39 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA6BE55C23DB48B600066F39 /* LaunchScreen.storyboard */; };
 		EA6BE56923DB48B700066F39 /* NotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE56823DB48B700066F39 /* NotesTests.swift */; };
 		EA6BE57423DB48B700066F39 /* NotesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE57323DB48B700066F39 /* NotesUITests.swift */; };
+		EA6BE58323DB4A3500066F39 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE58223DB4A3500066F39 /* Note.swift */; };
+		EA6BE58623DB4A8A00066F39 /* NoteExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE58523DB4A8A00066F39 /* NoteExtension.swift */; };
+		EA6BE58823DB4B0B00066F39 /* FileNotebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,9 @@
 		EA6BE56F23DB48B700066F39 /* NotesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NotesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6BE57323DB48B700066F39 /* NotesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesUITests.swift; sourceTree = "<group>"; };
 		EA6BE57523DB48B700066F39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA6BE58223DB4A3500066F39 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		EA6BE58523DB4A8A00066F39 /* NoteExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteExtension.swift; sourceTree = "<group>"; };
+		EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotebook.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,8 @@
 		EA6BE55023DB48B200066F39 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				EA6BE58423DB4A6B00066F39 /* Extensions */,
+				EA6BE58123DB495100066F39 /* Models */,
 				EA6BE55123DB48B200066F39 /* AppDelegate.swift */,
 				EA6BE55323DB48B200066F39 /* SceneDelegate.swift */,
 				EA6BE55523DB48B200066F39 /* ViewController.swift */,
@@ -126,6 +134,23 @@
 				EA6BE57523DB48B700066F39 /* Info.plist */,
 			);
 			path = NotesUITests;
+			sourceTree = "<group>";
+		};
+		EA6BE58123DB495100066F39 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA6BE58223DB4A3500066F39 /* Note.swift */,
+				EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EA6BE58423DB4A6B00066F39 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EA6BE58523DB4A8A00066F39 /* NoteExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,9 +284,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA6BE58823DB4B0B00066F39 /* FileNotebook.swift in Sources */,
+				EA6BE58623DB4A8A00066F39 /* NoteExtension.swift in Sources */,
 				EA6BE55623DB48B200066F39 /* ViewController.swift in Sources */,
 				EA6BE55223DB48B200066F39 /* AppDelegate.swift in Sources */,
 				EA6BE55423DB48B200066F39 /* SceneDelegate.swift in Sources */,
+				EA6BE58323DB4A3500066F39 /* Note.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
