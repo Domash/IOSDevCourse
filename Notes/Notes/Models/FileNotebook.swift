@@ -10,9 +10,12 @@ import UIKit
 
 class FileNotebook {
     
-    private enum FileNotebookError: String, Error {
+    public enum FileNotebookError: String, Error {
         case noteAlreadyExists = "Note already exists!"
     }
+    
+    private static let cachesFile = "notes.json"
+    private static let cachesDirPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     
     private(set) var notes = [String: Note]()
     
@@ -29,36 +32,37 @@ class FileNotebook {
     }
     
     public func saveToFile() {
-        if let dirPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
-            do {
-                let jsonArr = notes.map { $0.value.json }
-                let data = try JSONSerialization.data(withJSONObject: jsonArr, options: [])
-                let pathUrl = dirPath.appendingPathComponent("notes.json")
-                FileManager.default.createFile(atPath: pathUrl.path, contents: data, attributes: nil)
-            } catch let error {
-                print("Can't save notes to: \(error.localizedDescription)!")
-            }
+        let dirPath = FileNotebook.cachesDirPath!
+        do {
+            let jsonArr = notes.map { $0.value.json }
+            let data = try JSONSerialization.data(withJSONObject: jsonArr, options: [])
+            let pathUrl = dirPath.appendingPathComponent(FileNotebook.cachesFile)
+            FileManager.default.createFile(atPath: pathUrl.path, contents: data, attributes: nil)
+        } catch let error {
+            print("Can't save notes to: \(error.localizedDescription)!")
         }
     }
     
     public func loadFromFile() {
         notes.removeAll()
-        if let dirPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first {
-            do {
-                let pathUrl = dirPath.appendingPathComponent("notes.json")
-                if let data = FileManager.default.contents(atPath: pathUrl.path),
-                   let jsonNotes = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+        let dirPath = FileNotebook.cachesDirPath!
+        do {
+            let pathUrl = dirPath.appendingPathComponent(FileNotebook.cachesFile)
+            if let data = FileManager.default.contents(atPath: pathUrl.path) {
+                if let jsonNotes = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     for jsonNote in jsonNotes {
                         if let note = Note.parse(json: jsonNote) {
                             try self.add(note)
                         }
                     }
                 } else {
-                    print("Can't load notes!")
+                    // Log ...
                 }
-            } catch let error {
-                print("Can't load notes from: \(error.localizedDescription)!")
+            } else {
+                // Log ...
             }
+        } catch let error {
+            print("Can't load notes from: \(error.localizedDescription)!")
         }
     }
     
