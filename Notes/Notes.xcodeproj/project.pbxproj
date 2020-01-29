@@ -105,8 +105,7 @@
 		EA6BE55023DB48B200066F39 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
-				EA6BE58423DB4A6B00066F39 /* Extensions */,
-				EA6BE58123DB495100066F39 /* Models */,
+				EA6BE58123DB495100066F39 /* Model */,
 				EA6BE55123DB48B200066F39 /* AppDelegate.swift */,
 				EA6BE55323DB48B200066F39 /* SceneDelegate.swift */,
 				EA6BE55523DB48B200066F39 /* ViewController.swift */,
@@ -136,21 +135,14 @@
 			path = NotesUITests;
 			sourceTree = "<group>";
 		};
-		EA6BE58123DB495100066F39 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				EA6BE58223DB4A3500066F39 /* Note.swift */,
-				EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		EA6BE58423DB4A6B00066F39 /* Extensions */ = {
+		EA6BE58123DB495100066F39 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				EA6BE58523DB4A8A00066F39 /* NoteExtension.swift */,
+				EA6BE58223DB4A3500066F39 /* Note.swift */,
+				EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */,
 			);
-			path = Extensions;
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
