@@ -62,10 +62,10 @@ class FileNotebook {
                     }
                     DDLogInfo("Notes are load from file file.")
                 } else {
-                    // Log ...
+                    DDLogInfo("Can't serialize objects.")
                 }
             } else {
-                // Log ...
+                DDLogInfo("Can't open file by path.")
             }
         } catch let error {
             DDLogError("Can't load notes from: \(error.localizedDescription)!")

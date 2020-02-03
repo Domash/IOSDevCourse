@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import CocoaLumberjack
+
+private func initLogger() {
+    DDLog.add(DDOSLogger.sharedInstance)
+}
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        initLogger()
+
         return true
     }
 
