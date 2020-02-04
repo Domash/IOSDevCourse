@@ -16,97 +16,152 @@ import XCTest
 
 class NoteExtensionTests: XCTestCase {
     
-//    var baseNote: Note?
-//    var fullNote: Note?
-//
-//    var baseNoteJson: [String: Any]!
-//    var fullNoteJson: [String: Any]!
-//
-//    override func setUp() {
-//
-//        baseNote = Note(title: "Title", content: "Content")
-//        fullNote = Note(uid: UUID().uuidString, title: "Title", content: "Content", color: .cyan, importance: Importance.important, selfDestructionDate: Date().addingTimeInterval(322228))
-//
-//        baseNoteJson = baseNote?.json
-//        fullNoteJson = fullNote?.json
-//
-//        let parsedBaseNote = Note.parse(json: baseNoteJson)
-//        let parsedFullNote = Note.parse(json: fullNoteJson)
-//
-//        baseNoteJson = baseNote?.json
-//        fullNoteJson = fullNote?.json
-//
-//    }
-//
-//    func testParseCorrectNote() {
-//        XCTAssertNotNil(fullNoteJson["uid"])
-//        XCTAssertNotNil(fullNoteJson["title"])
-//        XCTAssertNotNil(fullNoteJson["content"])
-//        XCTAssertNotNil(fullNoteJson["color"])
-//        XCTAssertNotNil(fullNoteJson["importance"])
-//        XCTAssertNotNil(fullNoteJson["selfDestructionDate"])
-//    }
-//
-//    func testParseWithoutColor() {
-//        XCTAssertEqual(UIColor.white, baseNote?.color)
-//    }
-//
-//    func testParseWithoutDate() {
-//        XCTAssertNil(baseNote?.selfDestructionDate)
-//    }
-//
-//    func testParseWithoutRequiredFields() {
-//        baseNoteJson.removeValue(forKey: "title")
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson["title"] = "Title"
-//
-//        baseNoteJson.removeValue(forKey: "content")
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson["content"] = "Content"
-//
-//        if let uid = baseNoteJson["uid"] {
-//            baseNoteJson.removeValue(forKey: "uid")
-//            XCTAssertNil(Note.parse(json: baseNoteJson))
-//            baseNoteJson["uid"] = uid
-//        }
-//    }
-//
-//    func testParseWithTypoInJsonKeys() {
-//        baseNoteJson["Title"] = "Title"
-//        baseNoteJson.removeValue(forKey: "title")
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson.removeValue(forKey: "Title")
-//        baseNoteJson["title"] = "Title"
-//
-//        baseNoteJson["Content"] = "Content"
-//        baseNoteJson.removeValue(forKey: "content")
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson.removeValue(forKey: "Content")
-//        baseNoteJson["content"] = "Content"
-//
-//        if let uid = baseNoteJson["uid"] {
-//            baseNoteJson["Uid"] = uid
-//            baseNoteJson.removeValue(forKey: "uid")
-//            XCTAssertNil(Note.parse(json: baseNoteJson))
-//            baseNoteJson.removeValue(forKey: "Uid")
-//            baseNoteJson["uid"] = uid
-//        }
-//    }
-//
-//    func testParseCorrectType() {
-//        baseNoteJson["title"] = 228
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson["title"] = "Title"
-//
-//        baseNoteJson["content"] = 228
-//        XCTAssertNil(Note.parse(json: baseNoteJson))
-//        baseNoteJson["content"] = "Content"
-//
-//        if let uid = baseNoteJson["uid"] {
-//            baseNoteJson["uid"] = 228
-//            XCTAssertNil(Note.parse(json: baseNoteJson))
-//            baseNoteJson["uid"] = uid
-//        }
-//    }
+    override func setUp() {
+    }
+
+    func testParseCorrectNote() {
+        let note = Note(
+            uid: UUID().uuidString,
+            title: "Title",
+            content: "Content",
+            color: UIColor.cyan,
+            importance: Importance.important,
+            selfDestructionDate: Date().addingTimeInterval(322228)
+        )
+        
+        let noteJson = note.json
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertEqual(parsedNote?.uid, note.uid)
+        XCTAssertEqual(parsedNote?.title, note.title)
+        XCTAssertEqual(parsedNote?.content, note.content)
+        XCTAssertEqual(parsedNote?.color, note.color)
+        XCTAssertEqual(parsedNote?.importance, note.importance)
+        XCTAssertEqual(parsedNote?.selfDestructionDate?.timeIntervalSince1970,
+                       note.selfDestructionDate?.timeIntervalSince1970)
+    }
+
+    func testParseWithoutColor() {
+        let note = Note(
+            uid: UUID().uuidString,
+            title: "Title",
+            content: "Content",
+            importance: Importance.important,
+            selfDestructionDate: Date().addingTimeInterval(322228)
+        )
+        
+        let noteJson = note.json
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertEqual(parsedNote?.uid, note.uid)
+        XCTAssertEqual(parsedNote?.title, note.title)
+        XCTAssertEqual(parsedNote?.content, note.content)
+        XCTAssertEqual(parsedNote?.color, UIColor.white)
+        XCTAssertEqual(parsedNote?.importance, note.importance)
+        XCTAssertEqual(parsedNote?.selfDestructionDate?.timeIntervalSince1970,
+                       note.selfDestructionDate?.timeIntervalSince1970)
+    }
+
+    func testParseWithoutDate() {
+        let note = Note(
+            uid: UUID().uuidString,
+            title: "Title",
+            content: "Content",
+            importance: Importance.important
+        )
+        
+        let noteJson = note.json
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote?.selfDestructionDate)
+    }
+
+    func testParseWithoutRequiredFieldTitle() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["Title"] = "Title"
+        noteJson.removeValue(forKey: "title")
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
+
+    func testParseWithoutRequiredFieldContent() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["Content"] = "Content"
+        noteJson.removeValue(forKey: "content")
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
+    
+    func testParseWithTypoInJsonKeyTitle() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["tile"] = "Title"
+        noteJson.removeValue(forKey: "title")
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
+    
+    func testParseWithTypoInJsonKeyContent() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["conten"] = "Content"
+        noteJson.removeValue(forKey: "content")
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
+
+    func testParseCorrectTypeTitle() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["title"] = 100
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
+    
+    func testParseCorrectTypeContent() {
+        let note = Note(
+            title: "Title",
+            content: "Content"
+        )
+        
+        var noteJson = note.json
+        noteJson["content"] = 100
+        
+        let parsedNote = Note.parse(json: noteJson)
+        
+        XCTAssertNil(parsedNote)
+    }
     
 }
