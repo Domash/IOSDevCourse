@@ -1,4 +1,4 @@
-framework module Pods_Notes_NotesUITests {
+module Pods_Notes_NotesUITests {
   umbrella header "Pods-Notes-NotesUITests-umbrella.h"
 
   export *

@@ -11,7 +11,7 @@ import XCTest
 
 // Nimble
 // Quick
-// Charlies
+// Charles
 // erorr enum
 
 class NoteExtensionTests: XCTestCase {
