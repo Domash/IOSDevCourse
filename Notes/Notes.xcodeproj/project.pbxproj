@@ -125,8 +125,14 @@
 				0A7EDE1B2F36FB15FB67DD6B /* Pods-NotesTests.release.xcconfig */,
 				80CF71BFFDF7486FA9773D5A /* Pods-NotesTests.appmetrica.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		EA4C206D23EED8D100DB4015 /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ColorPicker;
 			sourceTree = "<group>";
 		};
 		EA6BE54523DB48B200066F39 = {
@@ -154,6 +160,7 @@
 		EA6BE55023DB48B200066F39 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				EA4C206D23EED8D100DB4015 /* ColorPicker */,
 				EA6BE58123DB495100066F39 /* Model */,
 				EA6BE55123DB48B200066F39 /* AppDelegate.swift */,
 				EA6BE55323DB48B200066F39 /* SceneDelegate.swift */,
