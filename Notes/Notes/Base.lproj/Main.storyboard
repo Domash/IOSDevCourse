@@ -18,11 +18,11 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gle-LH-Eeu">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-Ms-kua">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="403"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hga-Ms-kua">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="226"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="k5X-1O-RDX">
-                                                <rect key="frame" x="8" y="8" width="398" height="338"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="k5X-1O-RDX">
+                                                <rect key="frame" x="8" y="20" width="398" height="198"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ti0-rO-lJf">
                                                         <rect key="frame" x="0.0" y="0.0" width="398" height="34"/>
@@ -30,29 +30,104 @@
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-vU-Tkv">
-                                                        <rect key="frame" x="0.0" y="42" width="398" height="33"/>
+                                                        <rect key="frame" x="0.0" y="44" width="398" height="33"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i9v-yp-fam">
-                                                        <rect key="frame" x="0.0" y="83" width="398" height="31"/>
+                                                        <rect key="frame" x="0.0" y="87" width="398" height="31"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Le-W5-0Df">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use Destroy Date:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Le-W5-0Df">
                                                                 <rect key="frame" x="0.0" y="0.0" width="349" height="31"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qF4-af-MBA">
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qF4-af-MBA">
                                                                 <rect key="frame" x="349" y="0.0" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="dateSwitchValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Upj-1H-ofS"/>
+                                                                </connections>
                                                             </switch>
                                                         </subviews>
                                                     </stackView>
-                                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pxg-Oq-hvO">
-                                                        <rect key="frame" x="0.0" y="122" width="398" height="216"/>
+                                                    <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Pxg-Oq-hvO">
+                                                        <rect key="frame" x="0.0" y="123" width="398" height="0.0"/>
                                                     </datePicker>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" id="Agt-Zw-X7W">
+                                                        <rect key="frame" x="0.0" y="128" width="398" height="70"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6O-wS-UeZ" customClass="ColorSquareView" customModule="Notes" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <gestureRecognizers/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="YES"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="o96-eo-0ac" appends="YES" id="NzA-Ve-fys"/>
+                                                                </connections>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvw-6o-DFa" customClass="ColorSquareView" customModule="Notes" customModuleProvider="target">
+                                                                <rect key="frame" x="109.5" y="0.0" width="70" height="70"/>
+                                                                <color key="backgroundColor" red="0.79494938380000002" green="0.1506932218" blue="0.1207086268" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="7XY-xV-cMm" appends="YES" id="Qn2-FB-sft"/>
+                                                                </connections>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCR-GU-50y" customClass="ColorSquareView" customModule="Notes" customModuleProvider="target">
+                                                                <rect key="frame" x="218.5" y="0.0" width="70" height="70"/>
+                                                                <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="JWT-Nz-ntf" appends="YES" id="UHk-1f-68Y"/>
+                                                                </connections>
+                                                            </view>
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u2U-kx-Mxr" customClass="ColorSquareView" customModule="Notes" customModuleProvider="target">
+                                                                <rect key="frame" x="328" y="0.0" width="70" height="70"/>
+                                                                <color key="backgroundColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <gestureRecognizers/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="70" id="23P-mb-ssR"/>
+                                                                    <constraint firstAttribute="width" secondItem="u2U-kx-Mxr" secondAttribute="height" multiplier="1:1" id="fky-tV-2Yd"/>
+                                                                </constraints>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isGradient" value="YES"/>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="2"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSelected" value="NO"/>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <outletCollection property="gestureRecognizers" destination="zAS-7g-YBh" appends="YES" id="nhp-xU-bk1"/>
+                                                                </connections>
+                                                            </view>
+                                                        </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="cvw-6o-DFa" firstAttribute="width" secondItem="u2U-kx-Mxr" secondAttribute="width" id="KAJ-rq-6XW"/>
+                                                            <constraint firstItem="P6O-wS-UeZ" firstAttribute="width" secondItem="u2U-kx-Mxr" secondAttribute="width" id="iXj-mH-0p5"/>
+                                                            <constraint firstItem="zCR-GU-50y" firstAttribute="width" secondItem="u2U-kx-Mxr" secondAttribute="width" id="r7r-aJ-jso"/>
+                                                        </constraints>
+                                                    </stackView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -60,7 +135,7 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="k5X-1O-RDX" secondAttribute="bottom" constant="8" id="4vZ-gK-B8q"/>
                                             <constraint firstItem="k5X-1O-RDX" firstAttribute="leading" secondItem="Hga-Ms-kua" secondAttribute="leading" constant="8" id="5jM-0Z-qFG"/>
-                                            <constraint firstItem="k5X-1O-RDX" firstAttribute="top" secondItem="Hga-Ms-kua" secondAttribute="top" constant="8" id="BQW-Ob-MMw"/>
+                                            <constraint firstItem="k5X-1O-RDX" firstAttribute="top" secondItem="Hga-Ms-kua" secondAttribute="top" constant="20" id="BQW-Ob-MMw"/>
                                             <constraint firstAttribute="trailing" secondItem="k5X-1O-RDX" secondAttribute="trailing" constant="8" id="dTf-9W-M7n"/>
                                         </constraints>
                                     </view>
@@ -83,8 +158,36 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Pxg-Oq-hvO" id="RLV-Q2-byw"/>
+                        <outlet property="dateSwitch" destination="qF4-af-MBA" id="5sV-aW-HeU"/>
+                        <outletCollection property="SquareViews" destination="P6O-wS-UeZ" collectionClass="NSMutableArray" id="IVw-0t-rK1"/>
+                        <outletCollection property="SquareViews" destination="cvw-6o-DFa" collectionClass="NSMutableArray" id="03b-eT-xwl"/>
+                        <outletCollection property="SquareViews" destination="zCR-GU-50y" collectionClass="NSMutableArray" id="fDy-xZ-PGh"/>
+                        <outletCollection property="SquareViews" destination="u2U-kx-Mxr" collectionClass="NSMutableArray" id="joN-uq-XEa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="o96-eo-0ac">
+                    <connections>
+                        <action selector="changeColor:" destination="BYZ-38-t0r" id="0Mi-dy-qMm"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="7XY-xV-cMm">
+                    <connections>
+                        <action selector="changeColor:" destination="BYZ-38-t0r" id="0uC-a3-ydP"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer id="JWT-Nz-ntf">
+                    <connections>
+                        <action selector="changeColor:" destination="BYZ-38-t0r" id="Kgr-md-bo5"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="zAS-7g-YBh">
+                    <connections>
+                        <action selector="openColorPicker:" destination="BYZ-38-t0r" id="BZV-pf-dNJ"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
         </scene>
