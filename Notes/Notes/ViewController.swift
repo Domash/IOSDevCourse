@@ -16,36 +16,83 @@ class ViewController: UIViewController {
     @IBOutlet var SquareViews: [ColorSquareView]!
     var lastSelectedSquareView: ColorSquareView!
     
+    var brightnessValue: Float = 1.0
+    var cursorPosition: CGPoint = .zero
+    
     @IBAction func dateSwitchValueChanged(_ sender: UISwitch) {
         datePicker.isHidden = !dateSwitch.isOn
     }
     
     @IBAction func changeColor(_ sender: UITapGestureRecognizer) {
-        setColor(sender.view as? ColorSquareView)
-    }
-    @IBAction func openColorPicker(_ sender: UILongPressGestureRecognizer) {
         
+        guard let view = sender.view as? ColorSquareView else {
+            return
+        }
+        
+        if !view.isGradient {
+            setColor(view)
+        }
+        
+    }
+    
+    @IBAction func openColorPicker(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizer.State.began {
+            let storyboard = UIStoryboard(name: "ColorPicker", bundle: nil)
+            guard let viewController = storyboard.instantiateInitialViewController()
+                as? ColorPickerViewController else { return }
+            
+            viewController.modalPresentationStyle = .overCurrentContext
+            viewController.delegate = self
+            
+            setColor(SquareViews.last)
+            
+            if !SquareViews.last!.isGradient {
+                viewController.hasColor = true
+                viewController.cursorPositon = cursorPosition
+                viewController.brightnessValue = brightnessValue
+            }
+            
+            present(viewController, animated: true)
+        }
     }
     
     private func setColor(_ view: ColorSquareView?) {
         guard let view = view else {
             return
         }
-        view.isSelected = true
-        view.setNeedsDisplay()
+        
         lastSelectedSquareView.isSelected = false
         lastSelectedSquareView.setNeedsDisplay()
+        
+        view.isSelected = true
+        view.setNeedsDisplay()
+        
         lastSelectedSquareView = view
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
         lastSelectedSquareView = SquareViews.first
-        
     }
     
+}
+
+extension ViewController: Colorable {
+    
+    func passValue(of color: UIColor) {
+        if lastSelectedSquareView != SquareViews.last {
+            lastSelectedSquareView.isSelected = false
+            lastSelectedSquareView.setNeedsDisplay()
+        }
+        lastSelectedSquareView = SquareViews.last
+        lastSelectedSquareView.isGradient = false
+        lastSelectedSquareView.backgroundColor = color
+    }
+    
+    func passValue(of coordinates: CGPoint, and brightness: Float) {
+        cursorPosition = coordinates
+        brightnessValue = brightness
+    }
 }
 

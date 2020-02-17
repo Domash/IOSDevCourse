@@ -119,6 +119,7 @@
                                                                 </userDefinedRuntimeAttributes>
                                                                 <connections>
                                                                     <outletCollection property="gestureRecognizers" destination="zAS-7g-YBh" appends="YES" id="nhp-xU-bk1"/>
+                                                                    <outletCollection property="gestureRecognizers" destination="ENn-OI-iZ0" appends="YES" id="gzH-XM-JoB"/>
                                                                 </connections>
                                                             </view>
                                                         </subviews>
@@ -188,6 +189,11 @@
                         <action selector="openColorPicker:" destination="BYZ-38-t0r" id="BZV-pf-dNJ"/>
                     </connections>
                 </pongPressGestureRecognizer>
+                <tapGestureRecognizer id="ENn-OI-iZ0">
+                    <connections>
+                        <action selector="changeColor:" destination="BYZ-38-t0r" id="em8-bV-7PC"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="112.5"/>
         </scene>

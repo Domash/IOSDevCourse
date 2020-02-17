@@ -12,12 +12,17 @@ class ColorSquareView: UIView {
     
     @IBInspectable var isSelected: Bool = false
     @IBInspectable var isGradient: Bool = false
+    @IBInspectable var isRoundedCorners: Bool = false
     @IBInspectable var borderWidth: CGFloat = 0
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         if isSelected {
             setMark(rect)
+        }
+        if isRoundedCorners {
+            clipsToBounds = true
+            layer.cornerRadius = 11
         }
         layer.borderWidth = borderWidth
         layer.borderColor = UIColor.black.cgColor

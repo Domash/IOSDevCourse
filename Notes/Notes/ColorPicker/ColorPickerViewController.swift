@@ -10,4 +10,59 @@ import UIKit
 
 class ColorPickerViewController: UIViewController {
     
+    @IBOutlet weak var hexColorLabel: UILabel!
+    @IBOutlet weak var brightnessSlider: UISlider!
+    
+    @IBOutlet weak var colorView: ColorSquareView!
+    @IBOutlet weak var gradientPalette: ColorPickerView!
+    
+    var hasColor: Bool = false
+    var brightnessValue: Float = 1.0
+    var cursorPositon: CGPoint = .zero
+    
+    weak var delegate: Colorable?
+    
+    @IBAction func sliderValueChanged(_ sender: UISlider) {
+        gradientPalette.dimming = sender.value
+        updateColorView(for: cursorPositon)
+    }
+    
+    
+    @IBAction func pickerTapped(_ sender: UITapGestureRecognizer) {
+        cursorPositon = sender.location(in: gradientPalette)
+        updateColorView(for: cursorPositon)
+    }
+    
+    @IBAction func pickerDragged(_ sender: UIPanGestureRecognizer) {
+        cursorPositon = sender.location(in: gradientPalette)
+        updateColorView(for: cursorPositon)
+    }
+    
+    @IBAction func doneButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if hasColor {
+            brightnessSlider.value = brightnessValue
+        } else {
+            cursorPositon = CGPoint(
+                x: gradientPalette.bounds.midX,
+                y: gradientPalette.bounds.midY
+            )
+        }
+        
+        gradientPalette.dimming = brightnessSlider.value
+        gradientPalette.cursorPosition = (cursorPositon.x, cursorPositon.y)
+        updateColorView(for: cursorPositon)
+    }
+    
+    func updateColorView(for point: CGPoint) {
+        let color = gradientPalette.color(at: point)
+        colorView.backgroundColor = color
+        hexColorLabel.text = colorView.backgroundColor?.hexValue
+        delegate?.passValue(of: color)
+        delegate?.passValue(of: cursorPositon, and: brightnessSlider.value)
+    }
+    
 }

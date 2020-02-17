@@ -22,6 +22,9 @@
 		EA6BE58823DB4B0B00066F39 /* FileNotebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */; };
 		EA904FBF23E80B59007EC17B /* NoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA904FBE23E80B59007EC17B /* NoteTests.swift */; };
 		EA904FC123E80C5F007EC17B /* NoteExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA904FC023E80C5F007EC17B /* NoteExtensionTests.swift */; };
+		EA91D54F23FAE7D70024E259 /* UIColorHexValueExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D54E23FAE7D70024E259 /* UIColorHexValueExtension.swift */; };
+		EA91D55123FAE82D0024E259 /* UIViewColorAtPointExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D55023FAE82D0024E259 /* UIViewColorAtPointExtension.swift */; };
+		EA91D55423FB1A820024E259 /* ColorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA91D55323FB1A820024E259 /* ColorDelegate.swift */; };
 		EA94269523F1B8190099A2B0 /* ColorPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94269423F1B8190099A2B0 /* ColorPickerViewController.swift */; };
 		EA94269723F1B87A0099A2B0 /* ColorPicker.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA94269623F1B87A0099A2B0 /* ColorPicker.storyboard */; };
 		EA94519B23F176FF0018718F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94519A23F176FF0018718F /* ColorPickerView.swift */; };
@@ -76,6 +79,9 @@
 		EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNotebook.swift; sourceTree = "<group>"; };
 		EA904FBE23E80B59007EC17B /* NoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTests.swift; sourceTree = "<group>"; };
 		EA904FC023E80C5F007EC17B /* NoteExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteExtensionTests.swift; sourceTree = "<group>"; };
+		EA91D54E23FAE7D70024E259 /* UIColorHexValueExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHexValueExtension.swift; sourceTree = "<group>"; };
+		EA91D55023FAE82D0024E259 /* UIViewColorAtPointExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewColorAtPointExtension.swift; sourceTree = "<group>"; };
+		EA91D55323FB1A820024E259 /* ColorDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDelegate.swift; sourceTree = "<group>"; };
 		EA94269423F1B8190099A2B0 /* ColorPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewController.swift; sourceTree = "<group>"; };
 		EA94269623F1B87A0099A2B0 /* ColorPicker.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ColorPicker.storyboard; sourceTree = "<group>"; };
 		EA94519A23F176FF0018718F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
@@ -171,6 +177,8 @@
 		EA6BE55023DB48B200066F39 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				EA91D55223FB1A700024E259 /* Delegate */,
+				EA91D54D23FAE7B30024E259 /* Extension */,
 				EA94519923F176910018718F /* View */,
 				EA4C206D23EED8D100DB4015 /* ColorPicker */,
 				EA6BE58123DB495100066F39 /* Model */,
@@ -212,6 +220,23 @@
 				EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		EA91D54D23FAE7B30024E259 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EA91D54E23FAE7D70024E259 /* UIColorHexValueExtension.swift */,
+				EA91D55023FAE82D0024E259 /* UIViewColorAtPointExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		EA91D55223FB1A700024E259 /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				EA91D55323FB1A820024E259 /* ColorDelegate.swift */,
+			);
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		EA94519923F176910018718F /* View */ = {
@@ -431,7 +456,10 @@
 				EA94269523F1B8190099A2B0 /* ColorPickerViewController.swift in Sources */,
 				EA6BE55623DB48B200066F39 /* ViewController.swift in Sources */,
 				EA94519D23F178310018718F /* ColorSquareView.swift in Sources */,
+				EA91D54F23FAE7D70024E259 /* UIColorHexValueExtension.swift in Sources */,
 				EA94519B23F176FF0018718F /* ColorPickerView.swift in Sources */,
+				EA91D55123FAE82D0024E259 /* UIViewColorAtPointExtension.swift in Sources */,
+				EA91D55423FB1A820024E259 /* ColorDelegate.swift in Sources */,
 				EA6BE55223DB48B200066F39 /* AppDelegate.swift in Sources */,
 				EA6BE55423DB48B200066F39 /* SceneDelegate.swift in Sources */,
 				EA6BE58323DB4A3500066F39 /* Note.swift in Sources */,
