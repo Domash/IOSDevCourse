@@ -30,12 +30,25 @@ class ColorPickerViewController: UIViewController {
     
     @IBAction func pickerTapped(_ sender: UITapGestureRecognizer) {
         cursorPositon = sender.location(in: gradientPalette)
+        gradientPalette.cursorPosition = (cursorPositon.x, cursorPositon.y)
         updateColorView(for: cursorPositon)
     }
     
     @IBAction func pickerDragged(_ sender: UIPanGestureRecognizer) {
         cursorPositon = sender.location(in: gradientPalette)
-        updateColorView(for: cursorPositon)
+        guard let view = sender.view as? ColorPickerView else { return }
+        let translation = sender.translation(in: gradientPalette)
+        let point = sender.location(in: gradientPalette)
+        if view.point(inside: point, with: nil) {
+            let (x, y) = view.cursorPosition
+            cursorPositon = CGPoint(
+                x: x + translation.x,
+                y: y + translation.y
+            )
+            view.cursorPosition = (cursorPositon.x, cursorPositon.y)
+            updateColorView(for: cursorPositon)
+            sender.setTranslation(CGPoint.zero, in: gradientPalette)
+        }
     }
     
     @IBAction func doneButtonTapped(_ sender: UIButton) {

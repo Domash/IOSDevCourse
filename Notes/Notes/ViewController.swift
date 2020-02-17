@@ -73,6 +73,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SquareViews.last?.backgroundColor = UIColor(
+            patternImage: UIImage(named: "gradient_image.jpg")!
+        )
         lastSelectedSquareView = SquareViews.first
     }
     

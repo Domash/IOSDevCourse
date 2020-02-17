@@ -47,8 +47,23 @@ class ColorPickerView: UIView {
         super.draw(rect)
         ColorPickerView.gradientBackground(for: self, with: rect)
         dimmingBackground(for: dimmingValue)
+        drawPicker(x: x, y: y)
         layer.borderWidth = borderWidth
         layer.borderColor = UIColor.black.cgColor
+    }
+    
+    private func drawPicker(x: CGFloat, y: CGFloat) {
+        let path = UIBezierPath(
+            arcCenter: CGPoint(x: x, y: y),
+            radius: 12,
+            startAngle: 0,
+            endAngle: 180,
+            clockwise: true
+        )
+        path.lineWidth = 6
+        UIColor.purple.setStroke()
+        path.stroke()
+        
     }
     
 }
