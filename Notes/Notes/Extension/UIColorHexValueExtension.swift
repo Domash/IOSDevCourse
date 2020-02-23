@@ -6,7 +6,7 @@
 //  Copyright © 2020 Денис Домашевич. All rights reserved.
 //
 
-import UIKit
+import UIKit.UIColor
 
 extension UIColor {
     public var hexValue: String {
