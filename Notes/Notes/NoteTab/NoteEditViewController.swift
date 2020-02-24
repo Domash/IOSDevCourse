@@ -33,10 +33,6 @@ class NoteEditViewController: UIViewController {
     }
     
     @objc func saveBarButtonTapped() {
-//        var passedNoteIndex = -1
-//        if let passedNote = passedNote {
-//            passedNoteIndex = notebook.remove(with: passedNote.uid)
-//        }
         
         guard let title = titleLabel.text else { return  }
         guard let content = contentTextView.text else { return  }

@@ -11,14 +11,13 @@ import UIKit
 class NotesTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView! {
-        didSet{
+        didSet {
             tableView.delegate = self
             tableView.dataSource = self
         }
     }
     
     let notebook = FileNotebook()
-    //var note: Note?
     
     @IBOutlet weak var editBarButton: UIBarButtonItem! {
         didSet {

@@ -9,7 +9,6 @@
 import UIKit.UIColor
 
 extension UIColor {
-    
     public var hexValue: String {
         guard let components = self.cgColor.components else {
             return "#FFFFFF"
@@ -21,6 +20,4 @@ extension UIColor {
             Int(components[2] * 255.0)
         )
     }
-
-    
 }
