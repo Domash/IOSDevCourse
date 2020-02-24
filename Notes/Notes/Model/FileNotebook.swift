@@ -18,27 +18,28 @@ class FileNotebook {
     private static let cachesFile = "notes.json"
     private static let cachesDirPath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first
     
-    private(set) var notes = [String: Note]()
+    private(set) var notes: [Note] = []
     
-    public func add(_ note: Note) throws {
-        guard notes[note.uid] != nil else {
-            notes[note.uid] = note
-            DDLogInfo("Note with id = [\(note.uid)] is added.")
-            return
+    public func add(_ note: Note) {
+        if let index: Int = notes.firstIndex(where: {$0.uid == note.uid}) {
+            DDLogInfo("Note with id = [\(note.uid)] could not be added, note with this uuid already exists. Index = [\(index)!")
+            // throw FileNotebookError.noteAlreadyExists
         }
-        DDLogInfo("Note with id = [\(note.uid)] could not be added, note with this uuid already exists.")
-        throw FileNotebookError.noteAlreadyExists
+        notes.append(note)
+        DDLogInfo("Note with id = [\(note.uid)] is added.")
     }
     
     public func remove(with uid: String) {
-        notes.removeValue(forKey: uid)
-        DDLogInfo("Note with id = [\(uid)] is removed.")
+        if let index: Int = notes.firstIndex(where: {$0.uid == uid}) {
+            notes.remove(at: index)
+            DDLogInfo("Note with id = [\(uid)] is removed.")
+        }
     }
     
     public func saveToFile() {
         let dirPath = FileNotebook.cachesDirPath!
         do {
-            let jsonArr = notes.map { $0.value.json }
+            let jsonArr = notes.map { $0.json }
             let data = try JSONSerialization.data(withJSONObject: jsonArr, options: [])
             let pathUrl = dirPath.appendingPathComponent(FileNotebook.cachesFile)
             FileManager.default.createFile(atPath: pathUrl.path, contents: data, attributes: nil)
