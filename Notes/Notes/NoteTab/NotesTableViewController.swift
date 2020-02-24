@@ -20,10 +20,41 @@ class NotesTableViewController: UIViewController {
     let notebook = FileNotebook()
     //var note: Note?
     
+    @IBOutlet weak var editBarButton: UIBarButtonItem! {
+        didSet {
+            editBarButton.target = self
+            editBarButton.action = #selector(editBarButtonTapped)
+        }
+    }
+    
+    @objc func editBarButtonTapped() {
+        tableView.isEditing = !tableView.isEditing
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         notebook.add(Note(title: "Hello", content: "KEK"))
-        notebook.add(Note(title: "Gfkld", content: "fjkdjk", color: .cyan, selfDestructionDate: nil))
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showNoteEditVC" {
+            guard let noteEditVC = segue.destination as? NoteEditViewController else {
+                return
+            }
+            
+            noteEditVC.notebook = notebook
+            
+            if let indexPathSender = sender as? IndexPath {
+                let selectedNote = notebook.notes[indexPathSender.row]
+                noteEditVC.passedNote = selectedNote
+            }
+            
+        }
     }
     
 }
@@ -31,7 +62,6 @@ class NotesTableViewController: UIViewController {
 extension NotesTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(notebook.notes.count)
         return notebook.notes.count
     }
     
@@ -43,17 +73,33 @@ extension NotesTableViewController: UITableViewDataSource {
         
         cell.titleLabel.text = currNote.title
         cell.contentLabel.text = currNote.content
+        cell.contentLabel.numberOfLines = 5
         cell.colorView.backgroundColor = currNote.color
         
         return cell
     }
-    
+        
 }
 
 extension NotesTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
         //note = notebook.notes[indexPath.row]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "showNoteEditVC", sender: indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            notebook.remove(with: notebook.notes[indexPath.row].uid)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
     
 }

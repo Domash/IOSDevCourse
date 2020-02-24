@@ -10,6 +10,12 @@ import UIKit
 
 class NoteEditViewController: UIViewController {
 
+    var notebook: FileNotebook!
+    var passedNote: Note? = nil
+    
+    @IBOutlet weak var titleLabel: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
+    
     @IBOutlet weak var dateSwitch: UISwitch!
     @IBOutlet weak var datePicker: UIDatePicker!
 
@@ -18,6 +24,60 @@ class NoteEditViewController: UIViewController {
     
     var brightnessValue: Float = 1.0
     var cursorPosition: CGPoint = .zero
+    
+    @IBOutlet weak var saveBarButton: UIBarButtonItem! {
+        didSet {
+            saveBarButton.target = self
+            saveBarButton.action = #selector(saveBarButtonTapped)
+        }
+    }
+    
+    @objc func saveBarButtonTapped() {
+//        var passedNoteIndex = -1
+//        if let passedNote = passedNote {
+//            passedNoteIndex = notebook.remove(with: passedNote.uid)
+//        }
+        
+        guard let title = titleLabel.text else { return  }
+        guard let content = contentTextView.text else { return  }
+        guard let color = lastSelectedSquareView.backgroundColor else { return  }
+        
+        var destructionDate: Date? = nil
+        if let datePicker = datePicker {
+            destructionDate = datePicker.date
+        }
+        
+        if !dateSwitch.isOn {
+            destructionDate = nil
+        }
+        
+        if let _ = passedNote {
+            guard let uid = passedNote?.uid else { return }
+            guard let importance = passedNote?.importance else { return }
+            
+            let rewriteNote = Note(
+                uid: uid,
+                title: title,
+                content: content,
+                color: color,
+                importance: importance,
+                selfDestructionDate: destructionDate
+            )
+            notebook.add(rewriteNote)
+        } else {
+            let newNote = Note(
+                title: title,
+                content: content,
+                color: color,
+                selfDestructionDate: destructionDate
+            )
+            notebook.add(newNote)
+        }
+            
+        navigationController?.popViewController(animated: true)
+        
+        
+    }
     
     @IBAction func dateSwitchValueChanged(_ sender: UISwitch) {
         datePicker.isHidden = !dateSwitch.isOn
@@ -73,10 +133,47 @@ class NoteEditViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    
         SquareViews.last?.backgroundColor = UIColor(
             patternImage: UIImage(named: "gradient_image.jpg")!
         )
         lastSelectedSquareView = SquareViews.first
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        setPassedNoteInfo()
+    }
+    
+    private func setPassedNoteInfo() {
+        guard let currNote = passedNote else {
+            return
+        }
+    
+        titleLabel.text = currNote.title
+        contentTextView.text = currNote.content
+        
+        switch currNote.color {
+            case .white:
+                setColor(SquareViews[0])
+            case .red:
+                setColor(SquareViews[1])
+            case .systemTeal:
+                setColor(SquareViews[2])
+            default:
+                setColor(SquareViews[3])
+                lastSelectedSquareView.isGradient = false
+                lastSelectedSquareView.backgroundColor = currNote.color
+        }
+        
+        guard let destructionDate = currNote.selfDestructionDate else {
+            return
+        }
+        
+        dateSwitch.isOn = true
+        datePicker.isHidden = !dateSwitch.isOn
+        datePicker.date = destructionDate
+        
     }
     
 }

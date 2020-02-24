@@ -62,7 +62,7 @@
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6O-wS-UeZ" customClass="ColorSquareView" customModule="Notes" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <gestureRecognizers/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -163,8 +163,11 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="LD5-hR-HE1" userLabel="Save Button"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="contentTextView" destination="Eyl-vU-Tkv" id="zDI-XM-Gna"/>
                         <outlet property="datePicker" destination="Pxg-Oq-hvO" id="RLV-Q2-byw"/>
                         <outlet property="dateSwitch" destination="qF4-af-MBA" id="5sV-aW-HeU"/>
+                        <outlet property="saveBarButton" destination="LD5-hR-HE1" id="8XC-9N-JMp"/>
+                        <outlet property="titleLabel" destination="ti0-rO-lJf" id="y53-8e-fdy"/>
                         <outletCollection property="SquareViews" destination="P6O-wS-UeZ" collectionClass="NSMutableArray" id="IVw-0t-rK1"/>
                         <outletCollection property="SquareViews" destination="cvw-6o-DFa" collectionClass="NSMutableArray" id="03b-eT-xwl"/>
                         <outletCollection property="SquareViews" destination="zCR-GU-50y" collectionClass="NSMutableArray" id="fDy-xZ-PGh"/>
@@ -351,11 +354,12 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="edit" id="aXw-fQ-k0n" userLabel="Edit Button"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CIB-EV-DcX" userLabel="Add Button">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="pGG-Bx-NHG"/>
+                                <segue destination="BYZ-38-t0r" kind="show" identifier="showNoteEditVC" id="pGG-Bx-NHG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editBarButton" destination="aXw-fQ-k0n" id="ekD-wq-Noc"/>
                         <outlet property="tableView" destination="X1f-mH-EOk" id="8QC-41-Hml"/>
                     </connections>
                 </viewController>

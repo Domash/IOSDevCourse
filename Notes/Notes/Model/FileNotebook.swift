@@ -22,18 +22,22 @@ class FileNotebook {
     
     public func add(_ note: Note) {
         if let index: Int = notes.firstIndex(where: {$0.uid == note.uid}) {
-            DDLogInfo("Note with id = [\(note.uid)] could not be added, note with this uuid already exists. Index = [\(index)!")
+            notes[index] = note
+            // DDLogInfo("Note with id = [\(note.uid)] could not be added, note with this uuid already exists. Index = [\(index)!")
             // throw FileNotebookError.noteAlreadyExists
+        } else {
+            notes.append(note)
+            DDLogInfo("Note with id = [\(note.uid)] is added.")
         }
-        notes.append(note)
-        DDLogInfo("Note with id = [\(note.uid)] is added.")
     }
     
-    public func remove(with uid: String) {
+    public func remove(with uid: String) -> Int {
         if let index: Int = notes.firstIndex(where: {$0.uid == uid}) {
             notes.remove(at: index)
             DDLogInfo("Note with id = [\(uid)] is removed.")
+            return index
         }
+        return -1
     }
     
     public func saveToFile() {
@@ -58,7 +62,7 @@ class FileNotebook {
                 if let jsonNotes = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
                     for jsonNote in jsonNotes {
                         if let note = Note.parse(json: jsonNote) {
-                            try self.add(note)
+                            self.add(note)
                         }
                     }
                     DDLogInfo("Notes are load from file file.")
