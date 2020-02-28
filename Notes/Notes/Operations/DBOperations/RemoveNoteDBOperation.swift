@@ -10,18 +10,20 @@ import Foundation
 
 class RemoveNoteDBOperation: BaseDBOperation {
     
-    private let note: Note
+    private let noteId: String
+    private(set) var result: Int?
+    
     
     init(
-        note: Note,
+        noteId: String,
         notebook: FileNotebook
     ) {
-        self.note = note
+        self.noteId = noteId
         super.init(notebook: notebook)
     }
     
     override func main() {
-        notebook.remove(with: note.uid)
+        result = notebook.remove(with: noteId)
         notebook.saveToFile()
         finish()
     }

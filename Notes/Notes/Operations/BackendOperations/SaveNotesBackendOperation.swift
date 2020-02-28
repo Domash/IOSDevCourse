@@ -19,7 +19,7 @@ enum SaveNotesBackendResult {
 
 class SaveNotesBackendOperation: BaseBackendOperation {
     
-    var result: SaveNotesBackendResult?
+    private(set) var result: SaveNotesBackendResult?
     
     init(notes: [Note]) {
         super.init()

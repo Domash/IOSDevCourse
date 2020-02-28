@@ -15,7 +15,7 @@ enum LoadNotesBackendResult {
 
 class LoadNotesBackendOperation: BaseBackendOperation {
     
-    var result: LoadNotesBackendResult?
+    private(set) var result: LoadNotesBackendResult?
     
     override init() {
         super.init()

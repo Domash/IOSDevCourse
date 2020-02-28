@@ -11,9 +11,9 @@ import Foundation
 class LoadNotesOperation: AsyncOperation {
     
     private let loadFromDb: LoadNotesDBOperation
-    private let dbQueue: OperationQueue
+    private let loadFromBackend: LoadNotesBackendOperation
     
-    private(set) var result: Bool? = false
+    private(set) var result: [Note]? = []
     
     init(
         notebook: FileNotebook,
@@ -21,30 +21,34 @@ class LoadNotesOperation: AsyncOperation {
         dbQueue: OperationQueue
     ) {
         
+        loadFromBackend = LoadNotesBackendOperation()
         loadFromDb = LoadNotesDBOperation(notebook: notebook)
-        self.dbQueue = dbQueue
         
         super.init()
         
-        loadFromDb.completionBlock = {
-            let loadFromBackend = LoadNotesBackendOperation()
-            loadFromBackend.completionBlock = {
-                switch loadFromBackend.result! {
-                case .success:
-                    self.result = true
-                case .failure:
-                    self.result = false
-                }
-                self.finish()
+        loadFromBackend.completionBlock = {
+            switch self.loadFromBackend.result! {
+            case .success(let notes):
+                self.result = notes
+            case .failure:
+                backendQueue.addOperation(self.loadFromDb)
             }
-            backendQueue.addOperation(loadFromBackend)
-            
         }
-
+        
+        addDependency(loadFromBackend)
+        addDependency(loadFromDb)
+        backendQueue.addOperation(loadFromBackend)
+        
     }
     
     override func main() {
-        dbQueue.addOperation(loadFromDb)
+        
+        if let notes = loadFromDb.result {
+            result = notes
+        }
+ 
+        finish()
+        
     }
     
 }

@@ -10,7 +10,7 @@ import Foundation
 
 class LoadNotesDBOperation: BaseDBOperation {
     
-    var result: [Note] = []
+    private(set) var result: [Note]?
     
     override init(
         notebook: FileNotebook
