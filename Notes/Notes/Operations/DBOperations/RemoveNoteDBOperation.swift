@@ -13,7 +13,6 @@ class RemoveNoteDBOperation: BaseDBOperation {
     private let noteId: String
     private(set) var result: Int?
     
-    
     init(
         noteId: String,
         notebook: FileNotebook

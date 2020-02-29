@@ -40,6 +40,11 @@ class FileNotebook {
         return -1
     }
     
+    public func update(forNotes notes: [Note]) {
+        self.notes = notes
+        saveToFile()
+    }
+    
     public func saveToFile() {
         let dirPath = FileNotebook.cachesDirPath!
         do {

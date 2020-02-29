@@ -30,6 +30,7 @@ class LoadNotesOperation: AsyncOperation {
             switch self.loadFromBackend.result! {
             case .success(let notes):
                 self.result = notes
+                notebook.update(forNotes: notes)
             case .failure:
                 backendQueue.addOperation(self.loadFromDb)
             }

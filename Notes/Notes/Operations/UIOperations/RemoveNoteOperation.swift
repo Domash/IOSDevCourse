@@ -46,6 +46,8 @@ class RemoveNoteOperation: AsyncOperation {
             }
         }
         
+        finish()
+        
     }
     
 }

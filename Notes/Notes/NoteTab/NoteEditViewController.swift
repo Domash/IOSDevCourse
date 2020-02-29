@@ -59,7 +59,8 @@ class NoteEditViewController: UIViewController {
                 importance: importance,
                 selfDestructionDate: destructionDate
             )
-            notebook.add(rewriteNote)
+            //notebook.add(rewriteNote)
+            saveNote(rewriteNote)
         } else {
             let newNote = Note(
                 title: title,
@@ -67,12 +68,28 @@ class NoteEditViewController: UIViewController {
                 color: color,
                 selfDestructionDate: destructionDate
             )
-            notebook.add(newNote)
+            //notebook.add(newNote)
+            saveNote(newNote)
         }
-            
-        navigationController?.popViewController(animated: true)
         
+    }
+    
+    private func saveNote(_ note: Note) {
+        let saveNoteOperation = SaveNoteOperation(
+            note: note,
+            notebook: notebook,
+            backendQueue: OperationQueue(),
+            dbQueue: OperationQueue()
+        )
         
+        saveNoteOperation.completionBlock = {
+            OperationQueue.main.addOperation {
+                self.passedNote = nil
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
+        OperationQueue().addOperation(saveNoteOperation)
     }
     
     @IBAction func dateSwitchValueChanged(_ sender: UISwitch) {

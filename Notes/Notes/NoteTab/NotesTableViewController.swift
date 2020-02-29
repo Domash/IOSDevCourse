@@ -10,14 +10,14 @@ import UIKit
 
 class NotesTableViewController: UIViewController {
     
+    let notebook = FileNotebook()
+    
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.delegate = self
             tableView.dataSource = self
         }
     }
-    
-    let notebook = FileNotebook()
     
     @IBOutlet weak var editBarButton: UIBarButtonItem! {
         didSet {
@@ -32,7 +32,18 @@ class NotesTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        notebook.add(Note(title: "Hello", content: "KEK"))
+        
+        let loadNotesOperation = LoadNotesOperation(
+            notebook: notebook,
+            backendQueue: OperationQueue(),
+            dbQueue: OperationQueue()
+        )
+        
+        loadNotesOperation.completionBlock = {
+            OperationQueue.main.addOperation {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,7 +63,6 @@ class NotesTableViewController: UIViewController {
                 let selectedNote = notebook.notes[indexPathSender.row]
                 noteEditVC.passedNote = selectedNote
             }
-            
         }
     }
     
@@ -82,10 +92,6 @@ extension NotesTableViewController: UITableViewDataSource {
 
 extension NotesTableViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        //note = notebook.notes[indexPath.row]
-    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "showNoteEditVC", sender: indexPath)
     }
@@ -96,8 +102,22 @@ extension NotesTableViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete) {
-            notebook.remove(with: notebook.notes[indexPath.row].uid)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let noteId = notebook.notes[indexPath.row].uid
+            
+            let removeNoteOperation = RemoveNoteOperation(
+                noteId: noteId,
+                notebook: notebook,
+                backendQueue: OperationQueue(),
+                dbQueue: OperationQueue()
+            )
+            
+            removeNoteOperation.completionBlock = {
+                OperationQueue.main.addOperation {
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+            
+            OperationQueue().addOperation(removeNoteOperation)
         }
     }
     
