@@ -17,6 +17,9 @@ enum SaveNotesBackendResult {
     case failure(NetworkError)
 }
 
+let token = "5a956ffbb7b993d2794a2cf03a84f36750cdf2c3"
+let api = "https://api.github.com/gists"
+
 class SaveNotesBackendOperation: BaseBackendOperation {
     
     private(set) var result: SaveNotesBackendResult?
@@ -28,7 +31,7 @@ class SaveNotesBackendOperation: BaseBackendOperation {
     override func main() {
         result = .failure(.unreachable)
         finish()
-    }
+    }    
     
 }
 

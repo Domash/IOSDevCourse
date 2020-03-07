@@ -44,6 +44,8 @@ class NotesTableViewController: UIViewController {
                 self.tableView.reloadData()
             }
         }
+        
+        OperationQueue().addOperation(loadNotesOperation)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -24,7 +24,7 @@ struct Gist: Decodable {
 }
 
 private let token = "" // Set token
-private let githubGistAPI = "https://api.github.com/users/domash/gists"
+private let githubGistAPI = "https://api.github.com/gists"
 
 class ViewController: UIViewController {
 

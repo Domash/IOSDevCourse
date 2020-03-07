@@ -10,6 +10,7 @@
 		4D19586723C700BC707EC060 /* libPods-Notes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1EF50D53DC85343FD5501CDE /* libPods-Notes.a */; };
 		B960631D18E04391DB510BCB /* libPods-Notes-NotesUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F03C950066E0CD719BEE9B /* libPods-Notes-NotesUITests.a */; };
 		C58114317CBE9681D3BBEBED /* libPods-NotesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 68CAFC5E55AF6EE14EB20097 /* libPods-NotesTests.a */; };
+		EA2A1CC2241453D6002D7E2D /* Gist.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2A1CC1241453D6002D7E2D /* Gist.swift */; };
 		EA6BE55223DB48B200066F39 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE55123DB48B200066F39 /* AppDelegate.swift */; };
 		EA6BE55423DB48B200066F39 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE55323DB48B200066F39 /* SceneDelegate.swift */; };
 		EA6BE55623DB48B200066F39 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6BE55523DB48B200066F39 /* ViewController.swift */; };
@@ -79,6 +80,7 @@
 		B7F03C950066E0CD719BEE9B /* libPods-Notes-NotesUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Notes-NotesUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD3EA4635A558DE6117A3092 /* Pods-Notes-NotesUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Notes-NotesUITests.release.xcconfig"; path = "Target Support Files/Pods-Notes-NotesUITests/Pods-Notes-NotesUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DC65C339A74B98CEDEB8F5DA /* Pods-NotesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NotesTests.debug.xcconfig"; path = "Target Support Files/Pods-NotesTests/Pods-NotesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EA2A1CC1241453D6002D7E2D /* Gist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gist.swift; sourceTree = "<group>"; };
 		EA6BE54E23DB48B200066F39 /* Notes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Notes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA6BE55123DB48B200066F39 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA6BE55323DB48B200066F39 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				EA6BE58523DB4A8A00066F39 /* NoteExtension.swift */,
 				EA6BE58223DB4A3500066F39 /* Note.swift */,
 				EA6BE58723DB4B0B00066F39 /* FileNotebook.swift */,
+				EA2A1CC1241453D6002D7E2D /* Gist.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				EA94412B2406A2BF006D6122 /* LoadNotesOperation.swift in Sources */,
 				EA94519B23F176FF0018718F /* ColorPickerView.swift in Sources */,
 				EABBF27A24058DDC004ED959 /* ImagePreviewViewController.swift in Sources */,
+				EA2A1CC2241453D6002D7E2D /* Gist.swift in Sources */,
 				EA94412D2406A2D8006D6122 /* RemoveNoteOperation.swift in Sources */,
 				EA91D55123FAE82D0024E259 /* UIViewColorAtPointExtension.swift in Sources */,
 				EA91D55423FB1A820024E259 /* ColorDelegate.swift in Sources */,
