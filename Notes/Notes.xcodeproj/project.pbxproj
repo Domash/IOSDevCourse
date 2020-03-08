@@ -44,6 +44,7 @@
 		EA94412F2406A357006D6122 /* SaveNoteDBOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94412E2406A357006D6122 /* SaveNoteDBOperation.swift */; };
 		EA94519B23F176FF0018718F /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94519A23F176FF0018718F /* ColorPickerView.swift */; };
 		EA94519D23F178310018718F /* ColorSquareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA94519C23F178310018718F /* ColorSquareView.swift */; };
+		EA95F59F2414FFA900E356EA /* NetworkStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA95F59E2414FFA900E356EA /* NetworkStuff.swift */; };
 		EABBF27724056E65004ED959 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBF27524056E65004ED959 /* GalleryCollectionViewCell.swift */; };
 		EABBF27824056E65004ED959 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EABBF27624056E65004ED959 /* GalleryCollectionViewCell.xib */; };
 		EABBF27A24058DDC004ED959 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBF27924058DDC004ED959 /* ImagePreviewViewController.swift */; };
@@ -120,6 +121,7 @@
 		EA94412E2406A357006D6122 /* SaveNoteDBOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNoteDBOperation.swift; sourceTree = "<group>"; };
 		EA94519A23F176FF0018718F /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 		EA94519C23F178310018718F /* ColorSquareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSquareView.swift; sourceTree = "<group>"; };
+		EA95F59E2414FFA900E356EA /* NetworkStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStuff.swift; sourceTree = "<group>"; };
 		EABBF27524056E65004ED959 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EABBF27624056E65004ED959 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
 		EABBF27924058DDC004ED959 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		EA6BE55023DB48B200066F39 /* Notes */ = {
 			isa = PBXGroup;
 			children = (
+				EA95F59D2414FF0800E356EA /* Network */,
 				EA9440FF24069B3B006D6122 /* Operations */,
 				EAF08DA02405567B00687CAA /* GalleryTab */,
 				EA938B792402A1DA00E0DFC6 /* NoteTab */,
@@ -339,6 +342,14 @@
 				EA94519C23F178310018718F /* ColorSquareView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		EA95F59D2414FF0800E356EA /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EA95F59E2414FFA900E356EA /* NetworkStuff.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		EAF08DA02405567B00687CAA /* GalleryTab */ = {
@@ -561,6 +572,7 @@
 				EA6BE58623DB4A8A00066F39 /* NoteExtension.swift in Sources */,
 				EA94269523F1B8190099A2B0 /* ColorPickerViewController.swift in Sources */,
 				EA94411E2406A158006D6122 /* BaseBackendOperation.swift in Sources */,
+				EA95F59F2414FFA900E356EA /* NetworkStuff.swift in Sources */,
 				EA9441202406A17C006D6122 /* SaveNotesBackendOperation.swift in Sources */,
 				EA9441222406A1B7006D6122 /* LoadNotesDBOperation.swift in Sources */,
 				EA9441292406A2AC006D6122 /* SaveNoteOperation.swift in Sources */,

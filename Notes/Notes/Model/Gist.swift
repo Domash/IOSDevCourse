@@ -8,8 +8,6 @@
 
 import Foundation
 
-let databaseName = "ios-course-notes-db"
-
 struct Gist: Codable {
     let id: String
     let files: [String: GistFile]
