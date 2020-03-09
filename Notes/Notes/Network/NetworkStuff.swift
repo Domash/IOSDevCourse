@@ -13,7 +13,7 @@ class NetworkStuff {
     
     let DBNAME = "ios-course-notes-db"
     let API = "https://api.github.com/gists"
-    let TOKEN = ""
+    let TOKEN = "69e03cf779e5b6b2bee5005590e6c43600466c3c"
     
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0),
@@ -71,9 +71,18 @@ class NetworkStuff {
                 completion(gist.isEmpty)
                 
             }.resume()
+            
         } else {
             completion(false)
         }
+        
+    }
+    
+    func uploadGist() {
+        
+    }
+    
+    func updateGist() {
         
     }
     

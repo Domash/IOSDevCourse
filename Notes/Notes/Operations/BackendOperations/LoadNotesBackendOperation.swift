@@ -22,11 +22,6 @@ class LoadNotesBackendOperation: BaseBackendOperation {
     }
     
     override func main() {
-        
-        let gists = loadGists()
-        
-        print(gists)
-        
         result = .failure(.unreachable)
         finish()
     }
