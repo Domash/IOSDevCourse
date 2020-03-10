@@ -13,7 +13,10 @@ class NetworkStuff {
     
     let DBNAME = "ios-course-notes-db"
     let API = "https://api.github.com/gists"
-    let TOKEN = "69e03cf779e5b6b2bee5005590e6c43600466c3c"
+    let TOKEN = ""
+    
+    var gist: [Gist]? = nil
+    var notes: [Note] = []
     
     class func isConnectedToNetwork() -> Bool {
         var zeroAddress = sockaddr_in(sin_len: 0, sin_family: 0, sin_port: 0, sin_addr: in_addr(s_addr: 0),
@@ -40,7 +43,8 @@ class NetworkStuff {
     }
     
     
-    func loadGists(completion: @escaping (Bool) -> Void) {
+    //completion: @escaping (Bool) -> Void
+    func loadGists() {
         
         if NetworkStuff.isConnectedToNetwork() {
             let components = URLComponents(string: API)
@@ -59,21 +63,59 @@ class NetworkStuff {
                 guard let loadedGists = try? JSONDecoder().decode([Gist].self, from: data) else {
                     return
                 }
+
                 
                 let gist = loadedGists.filter { ($0.files.first?.value.filename.contains("\(self.DBNAME)"))! }
+                self.gist = gist
                 
                 if !gist.isEmpty {
-                    
+                    self.loadGistContent()
                 } else {
                     
                 }
                 
-                completion(gist.isEmpty)
+                //completion(gist.isEmpty)
                 
             }.resume()
             
         } else {
-            completion(false)
+            //completion(false)
+        }
+        
+    }
+    //completion: @escaping ([Note]) -> Void
+    func loadGistContent() {
+        
+        if let strUrl = (gist?.first?.files.first?.value.rawUrl) {
+            guard let url = URL(string: strUrl) else { return }
+            
+            print(url)
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    print(error)
+                    return
+                }
+                
+                guard let data = data else {
+                    return
+                }
+                
+                guard let notesJson = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
+                    return
+                }
+                
+                for noteJson in notesJson {
+                    if let note = Note.parse(json: noteJson) {
+                        self.notes.append(note)
+                    }
+                }
+            }
+            
+            task.resume()
         }
         
     }

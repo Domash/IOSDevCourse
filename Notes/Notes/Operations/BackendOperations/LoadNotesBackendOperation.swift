@@ -22,6 +22,10 @@ class LoadNotesBackendOperation: BaseBackendOperation {
     }
     
     override func main() {
+        
+        let network: NetworkStuff = NetworkStuff()
+        network.loadGists()
+        
         result = .failure(.unreachable)
         finish()
     }
