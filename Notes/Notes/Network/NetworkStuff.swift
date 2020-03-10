@@ -13,7 +13,7 @@ class NetworkStuff {
     
     let DBNAME = "ios-course-notes-db"
     let API = "https://api.github.com/gists"
-    let TOKEN = "f04ceaf235034bb0a0770e381598c79f248bfcc2"
+    let TOKEN = ""
     
     var gist: [Gist]? = nil
     var notes: [Note] = []
@@ -54,6 +54,18 @@ class NetworkStuff {
             request.setValue("token \(TOKEN)", forHTTPHeaderField: "Authorization")
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    completion(false)
+                    return
+                }
+                
+                let statusCode = (response as! HTTPURLResponse).statusCode
+                guard 200..<300 ~= statusCode else {
+                    print("Error: Incorrect status code: \(statusCode).")
+                    completion(false)
+                    return
+                }
+                
                 guard let data = data else {
                     return
                 }
@@ -61,7 +73,6 @@ class NetworkStuff {
                 guard let loadedGists = try? JSONDecoder().decode([Gist].self, from: data) else {
                     return
                 }
-
                 
                 let gist = loadedGists.filter { ($0.files.first?.value.filename.contains("\(self.DBNAME)"))! }
                 self.gist = gist
@@ -69,7 +80,7 @@ class NetworkStuff {
                 if !gist.isEmpty {
                     completion(true)
                 } else {
-                    completion(gist.isEmpty)
+                    completion(false)
                 }
                 
             }.resume()
@@ -89,6 +100,10 @@ class NetworkStuff {
             request.httpMethod = "GET"
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let error = error {
+                    return
+                }
+                
                 guard let data = data else {
                     return
                 }

@@ -32,12 +32,16 @@ class LoadNotesOperation: AsyncOperation {
                 self.result = notes
                 notebook.update(forNotes: notes)
             case .failure:
-                backendQueue.addOperation(self.loadFromDb)
+                if let notes = self.loadFromDb.result {
+                    self.result = notes
+                }
             }
         }
         
-        self.addDependency(loadFromBackend)
+        self.addDependency(loadFromDb)
+        dbQueue.addOperation(loadFromDb)
         
+        self.addDependency(loadFromBackend)
         backendQueue.addOperation(loadFromBackend)
         
     }

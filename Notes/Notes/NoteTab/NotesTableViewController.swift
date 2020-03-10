@@ -41,10 +41,11 @@ class NotesTableViewController: UIViewController {
         
         loadNotesOperation.completionBlock = {
             OperationQueue.main.addOperation {
+                print(self.notebook.notes.count)
                 self.tableView.reloadData()
             }
         }
-        
+
         OperationQueue().addOperation(loadNotesOperation)
     }
     

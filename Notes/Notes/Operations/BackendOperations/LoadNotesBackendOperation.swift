@@ -32,7 +32,7 @@ class LoadNotesBackendOperation: BaseBackendOperation {
                 network.loadGistContent(completion: completionLoadNotes)
             } else {
                 result = .failure(.unreachable)
-                finish()
+                semaphore.signal()
             }
         }
         
