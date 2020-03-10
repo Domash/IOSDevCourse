@@ -38,7 +38,8 @@ class AsyncOperation: Operation {
         fatalError("Should be overriden")
     }
     
-    func finish() {
+    func finish(string: String = "None") {
+        print("Finish -> " + string)
         willChangeValue(forKey: "isFinished")
         _finished = true
         didChangeValue(forKey: "isFinished")

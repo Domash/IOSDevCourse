@@ -17,17 +17,36 @@ class LoadNotesBackendOperation: BaseBackendOperation {
     
     private(set) var result: LoadNotesBackendResult?
     
+    private let network: NetworkStuff = NetworkStuff()
+    
     override init() {
         super.init()
     }
     
     override func main() {
+                
+        let semaphore = DispatchSemaphore(value: 0)
         
-        let network: NetworkStuff = NetworkStuff()
-        network.loadGists()
+        func completionGistExist(value: Bool) {
+            if value {
+                network.loadGistContent(completion: completionLoadNotes)
+            } else {
+                result = .failure(.unreachable)
+                finish()
+            }
+        }
         
-        result = .failure(.unreachable)
-        finish()
+        func completionLoadNotes(value: [Note]) {
+            result = .success(value)
+            semaphore.signal()
+        }
+        
+        network.loadGists(completion: completionGistExist)
+        
+        semaphore.wait()
+        
+        finish(string: "LoadNotesBackendOperation")
+        
     }
 
 }

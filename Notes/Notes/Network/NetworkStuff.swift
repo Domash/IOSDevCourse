@@ -13,7 +13,7 @@ class NetworkStuff {
     
     let DBNAME = "ios-course-notes-db"
     let API = "https://api.github.com/gists"
-    let TOKEN = ""
+    let TOKEN = "f04ceaf235034bb0a0770e381598c79f248bfcc2"
     
     var gist: [Gist]? = nil
     var notes: [Note] = []
@@ -42,9 +42,7 @@ class NetworkStuff {
         return connected
     }
     
-    
-    //completion: @escaping (Bool) -> Void
-    func loadGists() {
+    func loadGists(completion: @escaping (Bool) -> Void) {
         
         if NetworkStuff.isConnectedToNetwork() {
             let components = URLComponents(string: API)
@@ -69,37 +67,28 @@ class NetworkStuff {
                 self.gist = gist
                 
                 if !gist.isEmpty {
-                    self.loadGistContent()
+                    completion(true)
                 } else {
-                    
+                    completion(gist.isEmpty)
                 }
-                
-                //completion(gist.isEmpty)
                 
             }.resume()
             
         } else {
-            //completion(false)
+            completion(false)
         }
         
     }
-    //completion: @escaping ([Note]) -> Void
-    func loadGistContent() {
+    
+    func loadGistContent(completion: @escaping ([Note]) -> Void) {
         
         if let strUrl = (gist?.first?.files.first?.value.rawUrl) {
             guard let url = URL(string: strUrl) else { return }
-            
-            print(url)
             
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-                if let error = error {
-                    print(error)
-                    return
-                }
-                
                 guard let data = data else {
                     return
                 }
@@ -113,9 +102,10 @@ class NetworkStuff {
                         self.notes.append(note)
                     }
                 }
-            }
-            
-            task.resume()
+                
+                completion(self.notes)
+                
+            }.resume()
         }
         
     }

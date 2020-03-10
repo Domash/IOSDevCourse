@@ -42,6 +42,7 @@ class FileNotebook {
     
     public func update(forNotes notes: [Note]) {
         self.notes = notes
+        DDLogInfo("Update notes from backend.")
         saveToFile()
     }
     

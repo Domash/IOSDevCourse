@@ -13,7 +13,7 @@ class LoadNotesOperation: AsyncOperation {
     private let loadFromDb: LoadNotesDBOperation
     private let loadFromBackend: LoadNotesBackendOperation
     
-    private(set) var result: [Note]? = []
+    private(set) var result: [Note] = []
     
     init(
         notebook: FileNotebook,
@@ -36,19 +36,21 @@ class LoadNotesOperation: AsyncOperation {
             }
         }
         
-        addDependency(loadFromBackend)
-        addDependency(loadFromDb)
+        self.addDependency(loadFromBackend)
+        
         backendQueue.addOperation(loadFromBackend)
         
     }
     
     override func main() {
         
-        if let notes = loadFromDb.result {
-            result = notes
+        if result.isEmpty {
+            if let notes = loadFromDb.result {
+                result = notes
+            }
         }
- 
-        finish()
+        
+        finish(string: "LoadNotesOperation")
         
     }
     

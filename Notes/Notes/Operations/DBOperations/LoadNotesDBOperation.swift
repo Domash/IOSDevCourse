@@ -21,7 +21,7 @@ class LoadNotesDBOperation: BaseDBOperation {
     override func main() {
         notebook.loadFromFile()
         result = notebook.notes
-        finish()
+        finish(string: "LoadNotesDBOperation")
     }
     
 }
